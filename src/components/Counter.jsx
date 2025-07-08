@@ -16,10 +16,23 @@ let box =  document.getElementById('box')
 
   function handleClick() {
     const newCount = count + 1;
+     const context = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = context.createOscillator();
+            const gainNode = context.createGain();
+
+            oscillator.type = 'sine';              // Oddiy sinus tovush
+            oscillator.frequency.value = 200;      // Biroz balandroq (600Hz)
+            gainNode.gain.value = 0.05;            // Juda past volume (yumshoq)
+
+            oscillator.connect(gainNode);
+            gainNode.connect(context.destination);
+
+            oscillator.start();
+            oscillator.stop(context.currentTime + 0.1); // Faqat 0.1 soniya
     setCount(newCount);
 
     sanoq.style.color = "blue";
-
+  
     if (newCount % 100 === 0) {
         const context = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = context.createOscillator();
