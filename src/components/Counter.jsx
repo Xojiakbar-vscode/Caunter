@@ -24,7 +24,7 @@ let box =  document.getElementById('box')
             const gainNode = context.createGain();
 
             oscillator.type = 'sine';              // Oddiy sinus tovush
-            oscillator.frequency.value = 200;      // Biroz balandroq (600Hz)
+            oscillator.frequency.value = 300;      // Biroz balandroq (600Hz)
             gainNode.gain.value = 0.05;            // Juda past volume (yumshoq)
 
             oscillator.connect(gainNode);
@@ -36,7 +36,7 @@ let box =  document.getElementById('box')
         const context = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = context.createOscillator();
     oscillator.type = 'sine'; // tovush turi: sine, square, triangle, sawtooth
-    oscillator.frequency.setValueAtTime(440, context.currentTime); // 440Hz - A4 notasi
+    oscillator.frequency.setValueAtTime(840, context.currentTime); // 440Hz - A4 notasi
     oscillator.connect(context.destination);
     oscillator.start();
     oscillator.stop(context.currentTime + 0.2); // 0.2 soniya chalaylik
@@ -44,10 +44,33 @@ let box =  document.getElementById('box')
 }
     function deleteClick(){
       if(count > 0){
+          const context = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = context.createOscillator();
+            const gainNode = context.createGain();
+
+            oscillator.type = 'sine';              // Oddiy sinus tovush
+            oscillator.frequency.value = 300;      // Biroz balandroq (600Hz)
+            gainNode.gain.value = 0.05;            // Juda past volume (yumshoq)
+
+            oscillator.connect(gainNode);
+            gainNode.connect(context.destination);
+
+            oscillator.start();
+            oscillator.stop(context.currentTime + 0.1); // Faqat 0.1 soniya
           setCount(count-1)
         sanoq.style.color = "red";
-
+        
+         if (count % 100 === 0) {
+        const context = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = context.createOscillator();
+    oscillator.type = 'sine'; // tovush turi: sine, square, triangle, sawtooth
+    oscillator.frequency.setValueAtTime(840, context.currentTime); // 440Hz - A4 notasi
+    oscillator.connect(context.destination);
+    oscillator.start();
+    oscillator.stop(context.currentTime + 0.2); // 0.2 soniya chalaylik
+    }
       }
+      
 
     }
     function ResClick(){
