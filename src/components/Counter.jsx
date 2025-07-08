@@ -16,7 +16,10 @@ let box =  document.getElementById('box')
 
   function handleClick() {
     const newCount = count + 1;
-     const context = new (window.AudioContext || window.webkitAudioContext)();
+    setCount(newCount);
+
+    sanoq.style.color = "blue";
+   const context = new (window.AudioContext || window.webkitAudioContext)();
             const oscillator = context.createOscillator();
             const gainNode = context.createGain();
 
@@ -29,10 +32,6 @@ let box =  document.getElementById('box')
 
             oscillator.start();
             oscillator.stop(context.currentTime + 0.1); // Faqat 0.1 soniya
-    setCount(newCount);
-
-    sanoq.style.color = "blue";
-  
     if (newCount % 100 === 0) {
         const context = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = context.createOscillator();
