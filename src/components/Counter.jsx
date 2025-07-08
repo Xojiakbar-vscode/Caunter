@@ -14,13 +14,22 @@ let box =  document.getElementById('box')
 
     let [count, setCount] = useState(0)
 
-    function handleClick(){
-        setCount(count+1)
+  function handleClick() {
+    const newCount = count + 1;
+    setCount(newCount);
 
-        sanoq.style.color = "blue";
-        
-        
+    sanoq.style.color = "blue";
+
+    if (newCount % 100 === 0) {
+        const context = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = context.createOscillator();
+    oscillator.type = 'sine'; // tovush turi: sine, square, triangle, sawtooth
+    oscillator.frequency.setValueAtTime(440, context.currentTime); // 440Hz - A4 notasi
+    oscillator.connect(context.destination);
+    oscillator.start();
+    oscillator.stop(context.currentTime + 0.2); // 0.2 soniya chalaylik
     }
+}
     function deleteClick(){
       if(count > 0){
           setCount(count-1)
@@ -44,6 +53,7 @@ let box =  document.getElementById('box')
 }, 3000);
 
     }
+    
     function res(){
         sanoq.style.color = "greenyellow";
     sanoq.style.backgroundColor= "gray";
